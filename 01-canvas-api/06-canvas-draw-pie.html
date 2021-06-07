@@ -78,9 +78,60 @@
   })
 
   ctx.beginPath()
-  ctx.lineWidth = 2
-  ctx.strokeStyle = 'orange'
+  ctx.shadowOffsetX = 0
+  ctx.shadowOffsetY = 0
+  ctx.shadowBlur = 4
+  ctx.shadowColor = '#333'
+  ctx.fillStyle = '#5C1918'
+  ctx.moveTo(400, 300)
+  ctx.arc(400, 300, 100, -Math.PI / 2, -Math.PI / 4)
+  ctx.fill()
+  ctx.closePath()
+
+  ctx.beginPath()
+  ctx.shadowOffsetX = 0
+  ctx.shadowOffsetY = 0
+  ctx.shadowBlur = 4
+  ctx.shadowColor = '#5C1918'
+  ctx.fillStyle = '#A32D29'
+  ctx.moveTo(400, 300)
+  ctx.arc(400, 300, 110, -Math.PI / 4, Math.PI / 4)
+  ctx.fill()
+  ctx.closePath()
+
+  ctx.beginPath()
+  ctx.shadowOffsetX = 0
+  ctx.shadowOffsetY = 0
+  ctx.shadowBlur = 4
+  ctx.shadowColor = '#A32D29'
+  ctx.fillStyle = '#B9332E'
+  ctx.moveTo(400, 300)
+  ctx.arc(400, 300, 120, Math.PI / 4, Math.PI * 5 / 8)
+  ctx.fill()
+  ctx.closePath()
+
+  ctx.beginPath()
+  ctx.shadowOffsetX = 0
+  ctx.shadowOffsetY = 0
+  ctx.shadowBlur = 4
+  ctx.shadowColor = '#B9332E'
+  ctx.fillStyle = '#842320'
+  ctx.moveTo(400, 300)
+  ctx.arc(400, 300, 130, Math.PI * 5 / 8, Math.PI)
+  ctx.fill()
+  ctx.closePath()
   
+  ctx.beginPath()
+  ctx.shadowOffsetX = 0
+  ctx.shadowOffsetY = 0
+  ctx.shadowBlur = 4
+  ctx.shadowColor = '#842320'
+  ctx.fillStyle = '#D76662'
+  ctx.moveTo(400, 300)
+  ctx.arc(400, 300, 140, Math.PI, Math.PI * 3 / 2)
+  ctx.fill()
+  ctx.closePath()
+
 </script>
 
 </html>
