@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>canvas绘制直方图（柱状图）</title>
+  <title>canvas绘制圆形</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
@@ -78,38 +78,24 @@
     ctx: ctx
   })
 
-  // 绘制矩形 
-  // 描述+填充 描边 填充
-  // ctx.beginPath()
-  // ctx.lineWidth = 5
-  // ctx.strokeStyle = 'orange'
-  // ctx.fillStyle = 'hotpink'
-  // ctx.rect(100, 100, 300, 200) // （100,100）起点坐标  宽 300 高 200
-  // ctx.stroke()
-  // ctx.closePath()
-
-  // 描边
-  // ctx.beginPath()
-  // ctx.lineWidth = 4
-  // ctx.strokeStyle = 'seagreen'
-  // ctx.strokeRect(100, 310, 300, 200)
-  // ctx.closePath()
-
-  // 填充
-  // ctx.beginPath()
-  // ctx.fillStyle = 'skyblue'
-  // ctx.fillRect(410, 310, 300, 200)
-  // ctx.closePath()
-
-  // 绘制直方图 柱状图
+  // 绘制圆环
   ctx.beginPath()
-  for (let i = 1; i < Math.floor(wd * 1.5 / step); i++) {
-    // 随机的高度
-    const height = Math.random() * 300 + 50
-    ctx.fillStyle = '#' + parseInt(Math.random() * 0xFFFFFF).toString(16)
-    ctx.fillRect((i * step), ht * 1.5 - bottomPad - height, 40, height)
-  }
+  ctx.lineWidth = 2
+  ctx.strokeStyle = 'orange'
+
+  // 绘制圆弧 (400,300) 圆心位置坐标  100： 半径  0： 起始角度   Math.PI*2 ： 结束角度 360度  false: 代表顺时针 true: 代表逆时针
+  ctx.arc(400, 300, 200, 0, Math.PI / 4, false)
+  ctx.stroke() // 绘制描边
   ctx.closePath()
+
+  // 绘制圆形
+  ctx.beginPath()
+  ctx.fillStyle = 'skyblue'
+  ctx.moveTo(400, 300)
+  ctx.arc(400, 300, 100, 0, -Math.PI / 2, true)
+  ctx.fill()
+  ctx.closePath()
+
 
 </script>
 
