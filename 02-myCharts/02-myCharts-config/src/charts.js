@@ -1,6 +1,7 @@
 import utils from './utils'
 import myAnimation from './myAnimation'
 import Circle from './circle'
+import { drawAxis, drawPoint } from './broken'
 
 class MyCharts {
   constructor(defaultParam) {
@@ -43,6 +44,9 @@ class MyCharts {
     // 设置合适的画布宽度
     this.defaultParam.wid = this._canvas.width - 20
 
+    // 设置缩放比 
+    this.defaultParam.maxPoint = utils.maxData(this.defaultParam.data) / 0.8
+
     this.init()
   }
 
@@ -64,6 +68,17 @@ class MyCharts {
           percent: this.circleConfig.target,
           render: (current) => {
             Circle.call(this, current / 100)
+          }
+        })
+        break
+      case 'line':
+        myAnimation.call(this, {
+          percent: 200,
+          render: (current) => {
+            // 绘制坐标系
+            drawAxis.call(this)
+            // 绘制圆形
+            drawPoint.call(this, current / 200)
           }
         })
         break
