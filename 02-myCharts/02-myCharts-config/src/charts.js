@@ -1,7 +1,7 @@
 import utils from './utils'
 import myAnimation from './myAnimation'
 import Circle from './circle'
-import { drawAxis, drawPoint, drawBrokenLine } from './broken'
+import { drawAxis, drawPoint, drawBrokenLine, drawDashLine } from './broken'
 
 class MyCharts {
   constructor(defaultParam) {
@@ -79,6 +79,8 @@ class MyCharts {
             drawAxis.call(this)
             // 绘制虚线
             drawBrokenLine.call(this, current / 200)
+            // 绘制刻度和点之前的垂直连线
+            drawDashLine.call(this, current / 200)
             // 绘制圆形
             drawPoint.call(this, current / 200)
           }

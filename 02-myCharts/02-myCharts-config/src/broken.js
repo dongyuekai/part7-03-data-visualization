@@ -77,7 +77,7 @@ export function drawPoint(speed) {
 
 }
 
-// 绘制虚线
+// 绘制圆形数值点之间的虚线
 export function drawBrokenLine(speed) {
   const defaultParam = this.defaultParam
   const ctx = this.ctx
@@ -116,5 +116,35 @@ export function drawBrokenLine(speed) {
   }
   ctx.stroke()
   ctx.closePath()
+  ctx.restore()
+}
+
+// 绘制刻度和点之间的连线
+export function drawDashLine(speed) {
+  const defaultParam = this.defaultParam
+  const ctx = this.ctx
+  const bottomPad = 30
+  const data = defaultParam.data
+  const ht = defaultParam.ht
+  const maxPoint = defaultParam.maxPoint
+  const len = data.length
+
+  ctx.save()
+  for (let i = 0; i < len; i++) {
+    //  起始点
+    const averageNum = defaultParam.wid / data.length - 1
+    let axisX = i * averageNum + defaultParam.x
+    let axisY = ht - ht * (data[i].yVal) / maxPoint * speed - bottomPad
+
+    // 开始绘制
+    ctx.beginPath()
+    ctx.lineWidth = 2
+    ctx.setLineDash([4, 4])
+    ctx.strokeStyle = '#d6d6d6'
+    ctx.moveTo(axisX, ht - bottomPad)
+    ctx.lineTo(axisX, axisY)
+    ctx.stroke()
+    ctx.closePath()
+  }
   ctx.restore()
 }
