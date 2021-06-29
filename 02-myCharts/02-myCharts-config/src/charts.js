@@ -2,7 +2,7 @@ import utils from './utils'
 import myAnimation from './myAnimation'
 import Circle from './circle'
 import { drawAxis, drawPoint, drawBrokenLine, drawDashLine } from './broken'
-
+import { drawHistogram } from './histogram'
 class MyCharts {
   constructor(defaultParam) {
     this.defaultParam = defaultParam
@@ -83,6 +83,17 @@ class MyCharts {
             drawDashLine.call(this, current / 200)
             // 绘制圆形
             drawPoint.call(this, current / 200)
+          }
+        })
+        break
+      case 'histogram':
+        myAnimation.call(this, {
+          percent: 100,
+          render: (current) => {
+            // 绘制坐标系
+            drawAxis.call(this)
+            // 绘制直方图
+            drawHistogram.call(this, current / 100)
           }
         })
         break
