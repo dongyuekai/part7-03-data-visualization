@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>D3.js使用 Data-Driven Documents </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='./d3.min.js'></script>
+</head>
+
+<body>
+  <script>
+    const data = [100, 20, 30, 50]
+    d3.select('body').selectAll('p')
+    .data(data)
+    .enter()
+    .append('p')
+    .text('回答范德萨')
+  </script>
+</body>
+
+</html>
