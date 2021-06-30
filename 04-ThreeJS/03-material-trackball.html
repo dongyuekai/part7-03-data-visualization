@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>轨迹球控制与材质</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='./three.min.js'></script>
+  <script src='./TrackballControls.js'></script>
+</head>
+
+<body>
+  <script>
+    // 定义全局变量
+    let scene, camera, geometry, mesh, renderer, controls
+    // 初始化渲染器
+    function initRenderer() {
+      renderer = new THREE.WebGLRenderer({ antialias: true })
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setPixelRatio(window.devicePixelRatio)
+      document.body.appendChild(renderer.domElement)
+    }
+    // 初始化场景
+    function initScene() {
+      scene = new THREE.Scene()
+      // 辅助坐标系
+      const axesHelper = new THREE.AxesHelper(100)
+      scene.add(axesHelper)
+    }
+    // 初始化相机
+    function initCamera() {
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000) // 角度 纵横比 近 远
+      camera.position.set(0, 0, 15) // x y z
+      controls = new THREE.TrackballControls(camera, renderer.domElement)  // 轨迹球
+    }
+    // 初始化模型
+    function initMesh() {
+      // 几何体
+      geometry = new THREE.BoxGeometry(1, 1, 1)
+      // 材质
+      // material = new THREE.MeshNormalMaterial()
+      const texture = new THREE.TextureLoader().load('img/crate.gif')
+      material = new THREE.MeshBasicMaterial({
+        map: texture,
+        side: THREE.DoubleSide
+      })
+
+      mesh = new THREE.Mesh(geometry, material)
+      scene.add(mesh)
+    }
+    // 初始化动画
+    function animate() {
+      requestAnimationFrame(animate)
+      controls.update()
+      renderer.render(scene, camera)
+    }
+    // 定义初始化方法
+    function init() {
+      initRenderer()
+      initScene()
+      initCamera()
+      initMesh()
+      animate()
+    }
+
+    init()
+  </script>
+</body>
+
+</html>
