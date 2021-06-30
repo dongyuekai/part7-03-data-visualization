@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>三种选择集 update enter exit</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='./d3.min.js'></script>
+</head>
+
+<body>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <script>
+    //  数据
+    // const data = [1, 2, 3, 4, 5]
+    // const allAp = d3.selectAll('body p')
+    // const update = allAp.data(data) // 确定当前和数据对应的dom为更新
+    // update.text(d => '更新' + d) // 根据当前dom 用数据做对应更新
+    // const enter = update.enter() // 表示数据超出dom部分为新增的
+    // enter.append('p').text(d => '新增' + d) // 新增4 新增5
+
+    // const allAp = d3.selectAll('body p')
+    // const update = allAp.data(data)
+    // update.text(d => '更新' + d)
+
+    // exit
+    // const exit = update.exit()
+    // console.log(exit)
+    // exit.text(d => '将要删除' + d)
+
+    // enter
+    // d3.select('body').selectAll('p')
+    //   .data(data)
+    //   .enter()
+    //   .append('p')
+    //   .text(d => d)
+
+    // data datum
+    // const data = [1, 2, 3, 4, 5]
+    const data = '拉勾教育'
+    // const data = { name: '', age: 200 }
+    d3.selectAll('body p')
+      .datum(data)
+      .text(d => d)
+  </script>
+</body>
+
+</html>
