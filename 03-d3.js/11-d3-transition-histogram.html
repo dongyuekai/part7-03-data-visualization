@@ -6,7 +6,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="./d3.min.js"></script>
+  <style>
+    html,
+    body {
+      width: 100%;
+      margin: 0;
+    }
 
+    #tip {
+      color: #fff;
+      display: none;
+      margin-top: 15px;
+      margin-left: 15px;
+      position: absolute;
+      padding: 5px 10px;
+      border-radius: 3px;
+      background: rgba(0, 0, 0, .4);
+      font: normal 14px/1em '微软雅黑';
+    }
+  </style>
 </head>
 
 <body>
@@ -91,6 +109,68 @@
       .duration(1000)
       .ease(d3.easeBounce)
       .attr('y', (d) => yScale(d) - 5)
+
+    // 自定义缓动类
+    // 自定义缓动类
+    class EaseObj {
+      constructor(target) {
+        this.target = target
+        this.pos = { x: width / 2, y: height / 2 }
+        this.endPos = { x: 0, y: 0 }
+        this._play = false
+        this.fm = 0
+        this.speed = 0.1
+      }
+      set animate(value) {
+        if (value !== this._play) {
+          if (value) {
+            this.render()
+          } else {
+            this.cancel()
+          }
+          this._play = value
+        }
+      }
+
+      render() {
+        const { pos, endPos, speed, target } = this
+        pos.x += (endPos.x - pos.x) * speed
+        pos.y += (endPos.y - pos.y) * speed
+        target.style('left', `${pos.x}px`)
+          .style('top', `${pos.y}px`)
+
+        this.fm = requestAnimationFrame(() => {
+          this.render()
+        })
+      }
+
+      cancel() {
+        cancelAnimationFrame(this.fm)
+      }
+    }
+
+    // 10 定义提示框元素
+    const tip = d3.select('body').append('div').attr('id', 'tip')
+    // 11 鼠标移上
+    rects.on('mouseover', ({ clientX, clientY }, data) => {
+      tip.style('left', `${clientX}px`)
+        .style('top', `${clientY}px`)
+        .style('display', 'block')
+        .html(`
+          <p>此项平均值：${data}</p>
+        `)
+    })
+    const tipObj = new EaseObj(tip)
+    rects.on('mousemove', ({ clientX, clientY }, data) => {
+      tipObj.endPos = { x: clientX, y: clientY }
+      tipObj.animate = true
+    })
+
+    rects.on('mouseout', () => {
+      tipObj.animate = false
+      tip.style('display', 'none')
+    })
+
   </script>
 </body>
 
