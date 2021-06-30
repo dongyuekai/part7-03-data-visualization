@@ -160,6 +160,7 @@
           <p>此项平均值：${data}</p>
         `)
     })
+    
     const tipObj = new EaseObj(tip)
     rects.on('mousemove', ({ clientX, clientY }, data) => {
       tipObj.endPos = { x: clientX, y: clientY }
@@ -170,6 +171,17 @@
       tipObj.animate = false
       tip.style('display', 'none')
     })
+
+    // rects.on('mousemove', ({ clientX, clientY }, data) => {
+    //   tip.style('left', `${clientX}px`)
+    //     .style('top', `${clientY}px`)
+    // })
+
+    // rects.on('mouseout', ({ clientX, clientY }, data) => {
+    //   tip.style('left', `${clientX}px`)
+    //     .style('top', `${clientY}px`)
+    //     .style('display', 'none')
+    // })
 
   </script>
 </body>
